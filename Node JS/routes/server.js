@@ -16,9 +16,8 @@ app.get('/hello', (req, res) => {
 
 //post request
 app.post('/', (req, res) => {
-  const {name} = req.body; 
-  res.send(`Welcome ${name}`);
-})
+  res.send('POST request successful');
+});
 
 app.listen(PORT, (err) => {
   if(!err) {
