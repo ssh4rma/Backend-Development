@@ -14,6 +14,12 @@ app.get('/hello', (req, res) => {
   res.status(200).send('<h1>Hello User, this is Shubham from port 3000</h1>')
 })
 
+//post request
+app.post('/', (req, res) => {
+  const {name} = req.body; 
+  res.send(`Welcome ${name}`);
+})
+
 app.listen(PORT, (err) => {
   if(!err) {
     console.log(`Server is running on port ${PORT}`); 
