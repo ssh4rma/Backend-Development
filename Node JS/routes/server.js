@@ -5,7 +5,13 @@ const PORT = 3000;
 
 app.get('/', (req, res) => {
   res.status(200); 
-  res.json('welcome to the port 3000, This is Shubham');
+  res.send('welcome to the port 3000, This is Shubham');
+})
+
+//to a specific path
+app.get('/hello', (req, res) => {
+  res.set('Content-Type', 'text/html');
+  res.status(200).send('<h1>Hello User, this is Shubham from port 3000</h1>')
 })
 
 app.listen(PORT, (err) => {
