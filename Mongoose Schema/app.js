@@ -56,10 +56,15 @@ async function manageDocs() {
     
 
     const delRecord = await Demo.deleteOne({name: 'Shubham'});
-    console.log('Deleted result for Alice', delRecord);
+    console.log('Deleted result for Shubham', delRecord);
 
-    docs = await Demo.find();
-    console.log('Documents after deletion', docs);
+    // docs = await Demo.find();
+    // console.log('Documents after deletion', docs);
+
+    console.log('Find by Id');
+    let f = await Demo.findOne({name: 'Alice'});
+    console.log(f);
+    
   } catch(err) {
     console.log(err);
   }
