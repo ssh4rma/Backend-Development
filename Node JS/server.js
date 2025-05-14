@@ -1,11 +1,11 @@
 const express = require('express');
-const path = require('path');
 const app = express();
-
-app.use('/static', express.static(__dirname));
+const port = 3000;
 
 app.get('/', (req, res) => {
-  res.send('Server is running! Try <a href="/static/images.jpg">viewing the image</a>.');
-});
+  console.log('You are welcome at localhost:3000');
+})
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+app.listen(port, () => {
+  console.log(` http://localhost:${port}`)
+});
