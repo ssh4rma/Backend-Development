@@ -6,15 +6,15 @@ mongoose.connect('mongodb://localhost:27017/demoDB')
 const demoSchema = new mongoose.Schema({
   name: {
     type: String, 
-    require: true
+    required: true
   },
   phone: {
     type: Number, 
-    require: false
+    required: false
   },
   email: {
     type: String,
-    require: true
+    required: true
   }
 })
 
@@ -27,4 +27,24 @@ const d1 = new demo ({
   email: 'shubham@gmail.com'
 });
 
-d1.save();
+d1.save()
+  .then(() => console.log('success for d1'))
+  .catch(() => console.log('error inserting d1'));
+
+const d2 = new demo ({
+  name: 'John', 
+  phone: '12345', 
+  email: 'john@gmail.com'
+})
+d2.save()
+  .then(() => console.log('success for d2'))
+  .catch(() => console.log('error inserting d2'));
+
+const d3 = new demo ({
+  name: 'Alice', 
+  phone: 991212, 
+  email: 'alice@gmail.com'
+})
+d3.save();
+
+// demo.deleteOne({name: 'Alice'});
