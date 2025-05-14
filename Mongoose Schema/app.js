@@ -24,6 +24,10 @@ demoSchema.methods.getAllInfo = function () {
   return `${this.name}, ${this.phone}, ${this.email}`;
 };
 
+demoSchema.virtual('getName').get(function() {
+  return `This is ${this.name}`;
+}); 
+
 const Demo = mongoose.model('Demo', demoSchema);
 
 async function manageDocs() {
@@ -74,6 +78,8 @@ async function manageDocs() {
     if (f) {
       console.log('Calling getAllInfo on Alice:', f.getAllInfo());
     }
+
+    console.log('Calling the virtual getName fun', f.getName);
 
   } catch (err) {
     console.log(err);
