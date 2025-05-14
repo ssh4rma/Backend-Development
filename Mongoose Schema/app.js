@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/demoDB')
   .then(() => console.log('Successfully connected'))
-  .catch(() => console.log('Error connecting'));
+  .catch((err) => console.log(err));
 
 const demoSchema = new mongoose.Schema({
   name: {
@@ -19,32 +19,50 @@ const demoSchema = new mongoose.Schema({
 })
 
 //make a mongoose model
-const demo = new mongoose.model('Demo', demoSchema); 
+const Demo = new mongoose.model('Demo', demoSchema); 
 
-const d1 = new demo ({
-  name: 'Shubham', 
-  phone: 9112341343,
-  email: 'shubham@gmail.com'
-});
+async function manageDocs() {
+  try {
+    //d1
+    const d1 = new Demo({
+      name: 'Shubham', 
+      phone: 2341324,
+      email: 'shubham@gmail.com'
+    }); 
+    await d1.save();
+    console.log('d1 is inserted in db');
 
-d1.save()
-  .then(() => console.log('success for d1'))
-  .catch(() => console.log('error inserting d1'));
+    //d2
+    const d2 = new Demo({
+      name: 'John',
+      phone: 1234134,
+      email: 'john@gmai.com'
+    })
+    await d2.save();
+    console.log('d2 is inserted in db');
+    
+    //d3
+    const d3 = new Demo({
+      name: 'Alice',
+      phone: 181324,
+      email: 'alice@gmai.com'
+    })
+    await d3.save();
+    console.log('d3 is inserted in db');
 
-const d2 = new demo ({
-  name: 'John', 
-  phone: '12345', 
-  email: 'john@gmail.com'
-})
-d2.save()
-  .then(() => console.log('success for d2'))
-  .catch(() => console.log('error inserting d2'));
+    //log all documents before deletion
+    let docs = await Demo.find();
+    console.log('Documents before deletion', docs);
+    
 
-const d3 = new demo ({
-  name: 'Alice', 
-  phone: 991212, 
-  email: 'alice@gmail.com'
-})
-d3.save();
+    const delRecord = await Demo.deleteOne({name: 'Shubham'});
+    console.log('Deleted result for Alice', delRecord);
 
-// demo.deleteOne({name: 'Alice'});
+    docs = await Demo.find();
+    console.log('Documents after deletion', docs);
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+manageDocs();
