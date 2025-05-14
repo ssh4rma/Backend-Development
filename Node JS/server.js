@@ -1,11 +1,22 @@
-const express = require('express');
+//middleware implementation
+import express from 'express';
 const app = express();
-const port = 3000;
+
+app.use((req, res, next) => {
+  console.log(`${req.method}, ${req.url}`);
+  next();
+}); 
+
+app.use((req, res, next) => {
+  const loggedIn = true;
+  if(!loggedIn) {
+    return res.status(401).send('Not logged in!');
+  }
+  next();
+});
 
 app.get('/', (req, res) => {
-  console.log('You are welcome at localhost:3000');
-})
-
-app.listen(port, () => {
-  console.log(` http://localhost:${port}`)
+  console.log('Welcome to localhost'); 
 });
+
+app.listen(3000); 
