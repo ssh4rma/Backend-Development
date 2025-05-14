@@ -1,25 +1,18 @@
-import swaggerJSDoc from 'swagger-jsdoc';
-
-const swaggerDefinition = {
-  openapi: '3.0.0',
-  info: {
-    title: 'My API',
-    version: '1.0.0',
-    description: 'My API Description',
-  },
-  servers: [
-    {
-      url: 'http://localhost:3000',
-      description: 'Local server of Shubham',
-    },
-  ],
-};
+// swagger.js
+import swaggerJsdoc from 'swagger-jsdoc';
 
 const options = {
-  swaggerDefinition,
-  apis: ['./server.js'],
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Login/Signup API',
+            version: '1.0.0',
+            description: 'API documentation for user authentication',
+        },
+    },
+    apis: ['./authRoutes.js'], // Path to your route files
 };
 
-const swaggerSpec = swaggerJSDoc(options);
+const swaggerSpec = swaggerJsdoc(options);
 
 export default swaggerSpec;
